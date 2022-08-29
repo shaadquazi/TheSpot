@@ -1,15 +1,15 @@
-import * as React from "react";
+import * as React from 'react';
 
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import PauseIcon from "@mui/icons-material/Pause";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
-import Box from "@mui/material/Box";
-import UserCardList from "./UserCardList";
-import CardList from "./CardList";
-import ListItem from "./ListItem";
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import PauseIcon from '@mui/icons-material/Pause';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import Box from '@mui/material/Box';
+import UserCardList from './UserCardList';
+import CardList from './CardList';
+import ListItem from './ListItem';
 
 export default function QueueCardList(props) {
   const {
@@ -19,7 +19,7 @@ export default function QueueCardList(props) {
     handleSkipNextIcon,
   } = props;
 
-  const { users, playerActive } = props;
+  const {users, playerActive} = props;
 
   const playerBottomNavigation = (
     <>
@@ -28,9 +28,9 @@ export default function QueueCardList(props) {
       </IconButton>
       <IconButton aria-label="play/pause" onClick={handlePlayPauseArrowIcon}>
         {playerActive ? (
-          <PauseIcon sx={{ height: 38, width: 38 }} />
+          <PauseIcon sx={{height: 38, width: 38}} />
         ) : (
-          <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+          <PlayArrowIcon sx={{height: 38, width: 38}} />
         )}
       </IconButton>
       <IconButton aria-label="next" onClick={handleSkipNextIcon}>

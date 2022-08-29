@@ -1,20 +1,20 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { styled } from "@mui/system";
-import { Typography } from "@mui/material";
-import Grid from "@mui/material/Grid";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import BottomNavigation from "@mui/material/BottomNavigation";
-import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import {styled} from '@mui/system';
+import {Typography} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 
-import CardList from "./CardList";
-import ListItem from "./ListItem";
+import CardList from './CardList';
+import ListItem from './ListItem';
 
 export default function QueueCardList(props) {
-  const { handleAddToQueue, songs } = props;
+  const {handleAddToQueue, songs} = props;
 
   const QueueList = styled(CardList)({
-    height: "75vh",
+    height: '75vh',
   });
 
   const queueBottomNavigation = (
