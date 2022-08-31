@@ -16,6 +16,16 @@ function App() {
   const [songs, setSongs] = React.useState([]);
   const [snackBarMessage, setSnackBarMessage] = React.useState("");
   const [playerActive, setPlayerActive] = React.useState(false);
+  const [userOptionSelected, setUserOptionSelected] = React.useState(-1);
+
+  const handleUserCardOptions = () => {
+    if(userOptionSelected === 0){
+      console.log("Get User Info and add to list");
+    }
+    else if(userOptionSelected === 1){  
+      console.log("Connect to Spotify and get Token");
+    }    
+  };  
 
   const handleAddToQueue = (event, reason) => {
     setSongs((songs) => [...songs, "New Songs"]);
@@ -23,7 +33,15 @@ function App() {
     setSnackBarMessage("Added to your Queue");
   };
 
-  const handleAddUsers = (event, reason) => {
+  
+
+  React.useEffect(() => {
+    console.log("Inside useEffect");
+    setUserOptionSelected(handleUserCardOptions());    
+  }, [userOptionSelected]);
+
+  const handleUsersNavigation = (event, value) => {
+    setUserOptionSelected(value);
     setUsers((users) => [...users, "New Songs"]);
     setSnackBar(true);
     setSnackBarMessage("User Joined");
@@ -68,7 +86,7 @@ function App() {
           <Grid container direction="row" sx={{ height: "100%" }}>
             <QueueCardList songs={songs} handleAddToQueue={handleAddToQueue} />
             <InfoMenuList
-              handleAddUsers={handleAddUsers}
+              handleAddUsers={handleUsersNavigation}
               handleSkipPreviousIcon={handleSkipPreviousIcon}
               handlePlayPauseArrowIcon={handlePlayPauseArrowIcon}
               handleSkipNextIcon={handleSkipNextIcon}
