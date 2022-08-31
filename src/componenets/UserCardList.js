@@ -19,8 +19,12 @@ export default function UserCardList(props) {
 
   const userBottomNavigation = (
     <BottomNavigation showLabels onChange={handleAddUsers}>
-      <BottomNavigationAction label="Join Room" icon={<PlaylistAddIcon />} />
-      <BottomNavigationAction label="Connect To Spotify" icon={<ContactlessIcon />} />
+      <BottomNavigationAction
+        label="Join Room"
+        icon={<PlaylistAddIcon />} />
+      <BottomNavigationAction
+        label="Connect To Spotify"
+        icon={<ContactlessIcon />} />
     </BottomNavigation>
   );
 
