@@ -1,17 +1,26 @@
 import * as React from 'react';
-
+import Box from '@mui/material/Box';
 import {styled} from '@mui/system';
 import {Typography} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Divider from '@mui/material/Divider';
+import searchResults from '../test_data/search.json';
 
 import CardList from './CardList';
 import ListItem from './ListItem';
 
 export default function QueueCardList(props) {
-  const {handleAddToQueue, songs} = props;
+  const {
+    handleAddToQueue,
+    setSelectedOption,
+    songs,
+    searchTextBoxVisibility,
+  } = props;
 
   const QueueList = styled(CardList)({
     height: '75vh',
@@ -19,7 +28,7 @@ export default function QueueCardList(props) {
 
   const queueBottomNavigation = (
     <BottomNavigation showLabels onChange={handleAddToQueue}>
-      <BottomNavigationAction label="Add to Queue" icon={<PlaylistAddIcon />} />
+      <BottomNavigationAction label='Add to Queue' icon={<PlaylistAddIcon />} />
     </BottomNavigation>
   );
 
@@ -27,16 +36,50 @@ export default function QueueCardList(props) {
     <Grid item xs={8}>
       <QueueList
         elevation={2}
-        headerText="Song Queue"
-        BottomNavigation={queueBottomNavigation}
+        headerText='Song Queue'
+        BottomNavigation={
+          searchTextBoxVisibility ? (
+            <Autocomplete
+              sx={{width: 350}}
+              onChange={(event, value) => {
+                setSelectedOption(value);
+              }}
+              getOptionLabel={(songs) => songs.name}
+              options={searchResults.tracks.items}
+              renderOption={(props, option) => (
+                <Box {...props}>
+                  <ListItem
+                    key={option.id}
+                    alt={option.name}
+                    src={option.album.images[0].url}
+                    title={option.name}
+                    caption={option.artists
+                        .map((artist) => artist.name)
+                        .join(', ')}
+                  />
+                  <Divider />
+                </Box>
+              )}
+              renderInput={(params) => <TextField {...params} label='Search' />}
+            ></Autocomplete>
+          ) : (
+            queueBottomNavigation
+          )
+        }
       >
-        {songs && songs.length > 0 ? (
-          songs.map((song) => <ListItem
-            key={song.id}
-            alt=""
-            src=""
-            title="Song Name"
-            caption="Artist Name" />)
+        {Object.keys(songs).length > 0 ? (
+          Object.keys(songs).map((key, index) => {
+            const song = songs[key];
+            return (
+              <ListItem
+                key={song.id}
+                alt={song.display_name}
+                src={song.album.images[0].url}
+                title={song.name}
+                caption={song.artists.map((artist) => artist.name).join(', ')}
+              />
+            );
+          })
         ) : (
           <Typography>No Songs in Queue</Typography>
         )}

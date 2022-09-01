@@ -1,7 +1,6 @@
 import axios from 'axios';
 import authorize from '../test_data/authorize.json';
-import me from '../test_data/me.json';
-import search from '../test_data/search.json';
+import s from '../test_data/search.json';
 
 export async function connectToSpotify() {
   // const response = await axios.get(`/authorize`);
@@ -12,17 +11,20 @@ export async function connectToSpotify() {
 }
 
 export async function getUser(token) {
-  // const response = await axios.get(`/me`);
-  // console.log('Response: ', response);
-  console.log('Data: ', me);
-  return me;
+  const response = await axios.get(`https://api.spotify.com/v1/me`, {
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.data;
 }
 
 export async function search(query) {
   // const response = await axios.get(`/search`);
   // console.log('Response: ', response);
-  console.log('Data: ', search);
-  return search;
+  console.log('Data: ', s);
+  return s;
 }
 
 export default {connectToSpotify, getUser, search};

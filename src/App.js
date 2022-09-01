@@ -12,9 +12,13 @@ import { connectToSpotify, getUser } from './componenets/client';
 
 function App() {
   const [users, setUsers] = React.useState({});
+  const [songs, setSongs] = React.useState({});
+
   const [currentUser, setCurrentUser] = React.useState({});
   const [showSnackBar, setSnackBar] = React.useState(false);
-  const [songs, setSongs] = React.useState([]);
+  const [searchTextBoxVisibility, setsearchTextBoxVisibility] =
+    React.useState(false);
+  const [selectedOption, setSelectedOption] = React.useState(null);
   const [snackBarMessage, setSnackBarMessage] = React.useState('');
   const [userAccessToken, setUserAccessToken] = React.useState('');
   const [userRefreshToken, setUserRefreshToken] = React.useState('');
@@ -25,12 +29,14 @@ function App() {
   const handleUserCardOptions = () => {
     if (userOptionSelected === 0) {
       if (connected) {
-        getUser(userAccessToken).then((response) => {
-          setCurrentUser(response);
-          setUsers((users) =>
-            Object.assign({}, users, { [response.id]: response })
-          );
-        });
+        if (!currentUser.id) {
+          getUser(userAccessToken).then((response) => {
+            setCurrentUser(response);
+            setUsers((users) =>
+              Object.assign({}, users, { [response.id]: response })
+            );
+          });
+        }
       } else {
         setSnackBarMessage('Please connect to Spotify');
         setSnackBar(true);
@@ -61,9 +67,7 @@ function App() {
   const handleAddToQueue = (event, reason) => {
     if (connected) {
       if (currentUser.id) {
-        setSongs((songs) => [...songs, 'New Songs']);
-        setSnackBarMessage('Added to your Queue');
-        setSnackBar(true);
+        setsearchTextBoxVisibility(true);
       } else {
         setSnackBarMessage('Please join the session');
         setSnackBar(true);
@@ -74,10 +78,24 @@ function App() {
     }
   };
 
+  function addToQueue(song) {
+    console.log('song: ', song);
+    setSongs((songs) => Object.assign({}, songs, { [song.id]: song }));
+    setsearchTextBoxVisibility(false);
+    setSnackBarMessage('Added to your Queue');
+    setSnackBar(true);
+  }
+
   React.useEffect(() => {
     console.log('Inside useEffect');
     setUserOptionSelected(handleUserCardOptions());
-  }, [userOptionSelected]);
+  }, [userOptionSelected, searchTextBoxVisibility]);
+
+  React.useEffect(() => {
+    if (selectedOption && selectedOption.id) {
+      addToQueue(selectedOption);
+    }
+  }, [selectedOption]);
 
   const handleUsersNavigation = (event, value) => {
     setUserOptionSelected(value);
@@ -120,7 +138,12 @@ function App() {
         <PageHeader />
         <Box sx={{ flexGrow: 1, mt: 2, mb: 2, boxShadow: 3, overflow: 'auto' }}>
           <Grid container direction='row' sx={{ height: '100%' }}>
-            <QueueCardList songs={songs} handleAddToQueue={handleAddToQueue} />
+            <QueueCardList
+              songs={songs}
+              handleAddToQueue={handleAddToQueue}
+              searchTextBoxVisibility={searchTextBoxVisibility}
+              setSelectedOption={setSelectedOption}
+            />
             <InfoMenuList
               handleAddUsers={handleUsersNavigation}
               handleSkipPreviousIcon={handleSkipPreviousIcon}
