@@ -19,7 +19,7 @@ export default function QueueCardList(props) {
     handleSkipNextIcon,
   } = props;
 
-  const {users, playerActive} = props;
+  const {users, playerActive, connected} = props;
 
   const playerBottomNavigation = (
     <>
@@ -44,9 +44,17 @@ export default function QueueCardList(props) {
       <Box>
         <Grid container direction="column">
           <CardList elevation={2} BottomNavigation={playerBottomNavigation}>
-            <ListItem key="asd" />
+            <ListItem
+              key='{user.id}'
+              alt='Song Name'
+              src=''
+              title='Song Name'
+              caption='Artist Name' />
           </CardList>
-          <UserCardList users={users} handleAddUsers={handleAddUsers} />
+          <UserCardList
+            users={users}
+            handleAddUsers={handleAddUsers}
+            connected={connected}/>
         </Grid>
       </Box>
     </Grid>

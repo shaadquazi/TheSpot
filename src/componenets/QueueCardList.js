@@ -31,7 +31,12 @@ export default function QueueCardList(props) {
         BottomNavigation={queueBottomNavigation}
       >
         {songs && songs.length > 0 ? (
-          songs.map((song) => <ListItem key={song.id} props={song} />)
+          songs.map((song) => <ListItem
+            key={song.id}
+            alt=""
+            src=""
+            title="Song Name"
+            caption="Artist Name" />)
         ) : (
           <Typography>No Songs in Queue</Typography>
         )}

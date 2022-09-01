@@ -1,0 +1,21 @@
+{
+    "display_name": "Shaad Quazi",
+    "external_urls": {
+        "spotify": "https://open.spotify.com/user/w02wnlp9lmexs0ffu6qw828sz"
+    },
+    "followers": {
+        "href": null,
+        "total": 6
+    },
+    "href": "https://api.spotify.com/v1/users/w02wnlp9lmexs0ffu6qw828sz",
+    "id": "w02wnlp9lmexs0ffu6qw828sz",
+    "images": [
+        {
+            "height": null,
+            "url": "https://i.scdn.co/image/ab6775700000ee854e3bed11ddefd00b45f57687",
+            "width": null
+        }
+    ],
+    "type": "user",
+    "uri": "spotify:user:w02wnlp9lmexs0ffu6qw828sz"
+}
