@@ -1,4 +1,4 @@
-from app import app, redirect, request, session
+from app import app, redirect, request
 import uuid
 import requests
 import base64
@@ -15,7 +15,8 @@ def index():
 
 @app.route('/authorize')
 def authorize():    
-    state = uuid.uuid4()    
+    state = uuid.uuid4()
+    scope = "user-read-email user-top-read user-library-read"
     
     endpoint = "https://accounts.spotify.com/authorize"    
     payload = {
@@ -23,6 +24,7 @@ def authorize():
         'response_type': "code",
         'redirect_uri': f"{request.url_root}callback",
         'state': state,
+        'scope': scope,
         'show_dialog': True
     }    
     
@@ -50,9 +52,54 @@ def callback():
             "Authorization": f"Basic {base64_message}",
             "Content-Type": "application/x-www-form-urlencoded"
         }
-        
         response = requests.post(endpoint, params=payload, headers=headers)
         print("Response:  ", response)
         return response.json(), 200        
     else:
         return {'error': error}, 403
+
+
+usersOnline = {}
+@app.route('/users', methods=['GET', 'POST', 'DELETE'])
+def users():
+    if request.method == 'POST':
+        data = request.get_json()
+        user = {
+            'id': data['id'],
+            'display_name': data['display_name'],
+            'url': data['images'][0]['url']
+        }
+        usersOnline[user['id']] = user
+        return user, 201
+    elif request.method == 'DELETE':
+        id = request.args.get('id')
+        if id:
+            user = usersOnline.get(id)
+            usersOnline.pop(id)
+            return user, 200
+        return {'error': 'Please provide user.id'}, 400
+    else:
+        if usersOnline:
+            return {'users': usersOnline}, 200
+        else:
+            return {'users': {}}, 200
+
+globalQueue = {}
+@app.route('/queue', methods=['GET', 'POST', 'DELETE'])
+def queue():
+    if request.method == 'POST':
+        data = request.get_json()
+        globalQueue[data['id']] = data
+        return data, 201
+    elif request.method == 'DELETE':
+        id = request.args.get('id')
+        if id:
+            track = globalQueue.get(id)
+            globalQueue.pop(id)
+            return track, 200
+        return {'error': 'Please provide track.id'}, 400
+    else:
+        if globalQueue:
+            return {'queue': globalQueue}, 200
+        else:
+            return {'queue': {}}, 200

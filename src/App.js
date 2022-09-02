@@ -8,7 +8,18 @@ import PageHeader from './componenets/PageHeader';
 import QueueCardList from './componenets/QueueCardList';
 import InfoMenuList from './componenets/InfoMenuList';
 import SuccessSnackbar from './componenets/SuccessSnackbar';
-import { connectToSpotify, getUser } from './componenets/client';
+
+import {
+  connectToSpotify,
+  getUser,
+  getTracksFromLibrary,
+  joinListeningRoom,
+  leaveListeningRoom,
+  getUsersInListeningRoom,
+  addTrackToQueue,
+  removeTrackFromQueue,
+  getQueue
+} from './componenets/client';
 
 function App() {
   const [users, setUsers] = React.useState({});
@@ -16,15 +27,17 @@ function App() {
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [showSnackBar, setSnackBar] = React.useState(false);
-  const [searchTextBoxVisibility, setsearchTextBoxVisibility] =
+  const [searchTextBoxVisibility, setSearchTextBoxVisibility] =
     React.useState(false);
   const [selectedOption, setSelectedOption] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
   const [snackBarMessage, setSnackBarMessage] = React.useState('');
   const [userAccessToken, setUserAccessToken] = React.useState('');
   const [userRefreshToken, setUserRefreshToken] = React.useState('');
   const [connected, setConnected] = React.useState(false);
   const [playerActive, setPlayerActive] = React.useState(false);
   const [userOptionSelected, setUserOptionSelected] = React.useState(-1);
+  const [defaultSearchOptions, setDefaultSearchOptions] = React.useState({});
 
   const handleUserCardOptions = () => {
     if (userOptionSelected === 0) {
@@ -32,6 +45,8 @@ function App() {
         if (!currentUser.id) {
           getUser(userAccessToken).then((response) => {
             setCurrentUser(response);
+          });
+          joinListeningRoom(currentUser).then((response) => {
             setUsers((users) =>
               Object.assign({}, users, { [response.id]: response })
             );
@@ -43,15 +58,17 @@ function App() {
       }
     } else if (userOptionSelected === 1) {
       if (userAccessToken.length > 0 && userRefreshToken.length > 0) {
-        setUsers((users) => {
-          const remainingUsers = { ...users };
-          delete remainingUsers[currentUser.id];
-          return remainingUsers;
+        leaveListeningRoom(currentUser).then((response) => {
+          setUsers((users) => {
+            const remainingUsers = {...users};
+            delete remainingUsers[response.id];
+            return remainingUsers;
+          });
+          setUserAccessToken('');
+          setUserRefreshToken('');
+          setCurrentUser({});
+          setConnected(false);
         });
-        setUserAccessToken('');
-        setUserRefreshToken('');
-        setCurrentUser({});
-        setConnected(false);
       } else {
         connectToSpotify().then((response) => {
           setUserAccessToken(response.access_token);
@@ -67,7 +84,7 @@ function App() {
   const handleAddToQueue = (event, reason) => {
     if (connected) {
       if (currentUser.id) {
-        setsearchTextBoxVisibility(true);
+        setLoading(true);
       } else {
         setSnackBarMessage('Please join the session');
         setSnackBar(true);
@@ -78,18 +95,50 @@ function App() {
     }
   };
 
-  function addToQueue(song) {
+  const addToQueue = (song) => {
     console.log('song: ', song);
-    setSongs((songs) => Object.assign({}, songs, { [song.id]: song }));
-    setsearchTextBoxVisibility(false);
-    setSnackBarMessage('Added to your Queue');
-    setSnackBar(true);
-  }
+    addTrackToQueue(song).then((response) => {
+      setSongs((songs) => Object.assign({}, songs, { [response.id]: response }));
+      setSearchTextBoxVisibility(false);
+      setSnackBarMessage('Added to your Queue');
+      setSnackBar(true);
+    });
+  };
 
   React.useEffect(() => {
     console.log('Inside useEffect');
+    getQueue().then((response) => {
+      console.log('useEffect getQueue: ', response);
+      setSongs((songs) => Object.assign({}, songs, response));
+    });
     setUserOptionSelected(handleUserCardOptions());
-  }, [userOptionSelected, searchTextBoxVisibility]);
+    if (!currentUser.id) {
+      getUsersInListeningRoom().then((response) => {
+        setUsers((users) =>
+          Object.assign({}, users, response),
+        );
+      });
+    }
+  }, [userOptionSelected]);
+
+  React.useEffect(() => {
+    if (loading) {
+      if (Object.keys(defaultSearchOptions).length === 0) {
+        getTracksFromLibrary(userAccessToken).then((response) => {
+          const result = response.reduce(
+              (obj, track) => ({...obj, [track.external_ids.isrc]: track}),
+              {},
+          );
+          setDefaultSearchOptions((tracks) => Object.assign({}, tracks, result));
+          setLoading(false);
+          setSearchTextBoxVisibility(true);
+        });
+      } else {
+        setLoading(false);
+        setSearchTextBoxVisibility(true);
+      }
+    }
+  }, [loading]);
 
   React.useEffect(() => {
     if (selectedOption && selectedOption.id) {
@@ -141,8 +190,10 @@ function App() {
             <QueueCardList
               songs={songs}
               handleAddToQueue={handleAddToQueue}
+              loading={loading}
               searchTextBoxVisibility={searchTextBoxVisibility}
               setSelectedOption={setSelectedOption}
+              options={defaultSearchOptions}
             />
             <InfoMenuList
               handleAddUsers={handleUsersNavigation}

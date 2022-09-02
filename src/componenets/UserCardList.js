@@ -48,7 +48,7 @@ export default function UserCardList(props) {
         return <ListItem
           key={user.id}
           alt={user.display_name}
-          src={user.images[0].url}
+          src={user.url}
           title={user.display_name}
           caption='' />;
       })) : (
