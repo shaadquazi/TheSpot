@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
-import { Typography } from '@mui/material';
+import {styled} from '@mui/system';
+import {Typography} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import BottomNavigation from '@mui/material/BottomNavigation';
@@ -44,7 +44,7 @@ export default function QueueCardList(props) {
             <CircularProgress />
           ) : searchTextBoxVisibility ? (
             <Autocomplete
-              sx={{ width: 350 }}
+              sx={{width: 350}}
               onChange={(event, value) => {
                 setSelectedOption(value);
               }}
