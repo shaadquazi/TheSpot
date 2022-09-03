@@ -50,6 +50,7 @@ export async function getTracksFromLibrary(token) {
     })
         .filter((track) => typeof track !== 'undefined'));
     offset += limit;
+    // eslint-disable-next-line no-unused-vars
     next = data.next;
   }
   console.log('All Tracks', tracks);

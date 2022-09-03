@@ -17,8 +17,9 @@ import {
   leaveListeningRoom,
   getUsersInListeningRoom,
   addTrackToQueue,
+  // eslint-disable-next-line no-unused-vars
   removeTrackFromQueue,
-  getQueue
+  getQueue,
 } from './componenets/client';
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
           });
           joinListeningRoom(currentUser).then((response) => {
             setUsers((users) =>
-              Object.assign({}, users, { [response.id]: response })
+              Object.assign({}, users, {[response.id]: response}),
             );
           });
         }
@@ -98,7 +99,8 @@ function App() {
   const addToQueue = (song) => {
     console.log('song: ', song);
     addTrackToQueue(song).then((response) => {
-      setSongs((songs) => Object.assign({}, songs, { [response.id]: response }));
+      setSongs((songs) => Object.assign({},
+          songs, {[response.id]: response}));
       setSearchTextBoxVisibility(false);
       setSnackBarMessage('Added to your Queue');
       setSnackBar(true);
@@ -129,7 +131,8 @@ function App() {
               (obj, track) => ({...obj, [track.external_ids.isrc]: track}),
               {},
           );
-          setDefaultSearchOptions((tracks) => Object.assign({}, tracks, result));
+          setDefaultSearchOptions((tracks) => Object.assign({},
+              tracks, result));
           setLoading(false);
           setSearchTextBoxVisibility(true);
         });
@@ -185,8 +188,8 @@ function App() {
         }}
       >
         <PageHeader />
-        <Box sx={{ flexGrow: 1, mt: 2, mb: 2, boxShadow: 3, overflow: 'auto' }}>
-          <Grid container direction='row' sx={{ height: '100%' }}>
+        <Box sx={{flexGrow: 1, mt: 2, mb: 2, boxShadow: 3, overflow: 'auto'}}>
+          <Grid container direction='row' sx={{height: '100%'}}>
             <QueueCardList
               songs={songs}
               handleAddToQueue={handleAddToQueue}
