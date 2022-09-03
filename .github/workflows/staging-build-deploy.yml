@@ -56,4 +56,3 @@ jobs:
 
       - name: Deploy to S3
         run: aws s3 sync . s3://the-spot --acl public-read
-        working-directory: react-build
