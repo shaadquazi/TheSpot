@@ -27,6 +27,8 @@ jobs:
 
       - name: Building project
         run: npm run build
+        env:
+          CI: false
 
       - name: Share build inside workflow
         uses: actions/upload-artifact@v3
