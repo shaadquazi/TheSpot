@@ -4,6 +4,6 @@ import os
 client_id = os.environ.get('SPOTIFY_CLIENT_ID')
 client_secret = os.environ.get('SPOTIFY_CLIENT_SECRET')
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-from app import routes
+from application import routes
