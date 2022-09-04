@@ -48,12 +48,12 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
       
       - name: Create new Elastic Beanstalk Applicaiton Version
-        run : |
-        aws elasticbeanstalk create-application-version \
-        --application-name ${{ env.AWS_ELASTIC_BEANSTALK_APPLICATION_NAME }} \
-        --source-bundle S3Bucket="${{ secrets.AWS_S3_BUCKET_NAME }}", S3Key="${{ env.DEPLOY_PACKAGE_NAME }}" \
-        --version-label "version-${{ github.sha }}" \
-        --description "commit-SHA-${{ github.sha }}"
+        run: |
+          aws elasticbeanstalk create-application-version \
+          --application-name ${{ env.AWS_ELASTIC_BEANSTALK_APPLICATION_NAME }} \
+          --source-bundle S3Bucket="${{ secrets.AWS_S3_BUCKET_NAME }}", S3Key="${{ env.DEPLOY_PACKAGE_NAME }}" \
+          --version-label "version-${{ github.sha }}" \
+          --description "commit-SHA-${{ github.sha }}"
 
       - name: Deploy Elastic Beanstalk Applicaiton
-        run : aws elasticbeanstalk update-environment --environment-name ${{ env.AWS_ELASTIC_BEANSTALK_ENVIRONMENT_NAME }} --version-label "version-${{ github.sha }}"
+        run: aws elasticbeanstalk update-environment --environment-name ${{ env.AWS_ELASTIC_BEANSTALK_ENVIRONMENT_NAME }} --version-label "version-${{ github.sha }}"
