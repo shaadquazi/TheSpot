@@ -13,11 +13,19 @@ import removeTrackFromQueueFakeData
   from '../proxydata/removeTrackFromQueueFakeData.json';
 import addTrackToQueueFakeData
   from '../proxydata/addTrackToQueueFakeData.json';
+import axios from 'axios';
+
+const client = () => {
+  const instance = axios.create({
+    baseURL: process.env.REACT_APP_STAGING_ENDPOINT,
+  });
+  return instance;
+};
 
 export async function connectToSpotify() {
-  console.log('connectToSpotify</authorize <GET>>');
-  // const response = await axios.get(`/authorize`);
-  return connectToSpotifyFakeData;
+  const {data} = await client().get(`/authorize`);
+  console.log('connectToSpotify</authorize <GET>>', data);
+  return data; // connectToSpotifyFakeData;
 }
 
 export async function joinListeningRoom(user) {
