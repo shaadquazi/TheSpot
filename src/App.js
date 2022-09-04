@@ -8,11 +8,9 @@ import PageHeader from './componenets/PageHeader';
 import QueueCardList from './componenets/QueueCardList';
 import InfoMenuList from './componenets/InfoMenuList';
 import SuccessSnackbar from './componenets/SuccessSnackbar';
-
+import {getUser, getTracksFromLibrary} from './spotify/index';
 import {
   connectToSpotify,
-  getUser,
-  getTracksFromLibrary,
   joinListeningRoom,
   leaveListeningRoom,
   getUsersInListeningRoom,
@@ -20,7 +18,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   removeTrackFromQueue,
   getQueue,
-} from './componenets/client';
+} from './middleware/index';
 
 function App() {
   const [users, setUsers] = React.useState({});
@@ -46,11 +44,11 @@ function App() {
         if (!currentUser.id) {
           getUser(userAccessToken).then((response) => {
             setCurrentUser(response);
-          });
-          joinListeningRoom(currentUser).then((response) => {
-            setUsers((users) =>
-              Object.assign({}, users, {[response.id]: response}),
-            );
+            joinListeningRoom(currentUser).then((response) => {
+              setUsers((users) =>
+                Object.assign({}, users, {[response.id]: response}),
+              );
+            });
           });
         }
       } else {
@@ -97,7 +95,6 @@ function App() {
   };
 
   const addToQueue = (song) => {
-    console.log('song: ', song);
     addTrackToQueue(song).then((response) => {
       setSongs((songs) => Object.assign({},
           songs, {[response.id]: response}));
@@ -108,12 +105,13 @@ function App() {
   };
 
   React.useEffect(() => {
-    console.log('Inside useEffect');
+    console.log('useEffect<userOptionSelected>');
+    setUserOptionSelected(handleUserCardOptions());
+
     getQueue().then((response) => {
-      console.log('useEffect getQueue: ', response);
       setSongs((songs) => Object.assign({}, songs, response));
     });
-    setUserOptionSelected(handleUserCardOptions());
+
     if (!currentUser.id) {
       getUsersInListeningRoom().then((response) => {
         setUsers((users) =>
@@ -124,6 +122,7 @@ function App() {
   }, [userOptionSelected]);
 
   React.useEffect(() => {
+    console.log('useEffect<loading>');
     if (loading) {
       if (Object.keys(defaultSearchOptions).length === 0) {
         getTracksFromLibrary(userAccessToken).then((response) => {
@@ -144,6 +143,7 @@ function App() {
   }, [loading]);
 
   React.useEffect(() => {
+    console.log('useEffect<selectedOption>');
     if (selectedOption && selectedOption.id) {
       addToQueue(selectedOption);
     }

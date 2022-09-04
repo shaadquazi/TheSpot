@@ -4,13 +4,13 @@
         "artists": [
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/7dGJo4pcD2V6oG8kP0tJRR"
+                    "spotify": "https://open.spotify.com/artist/0fA0VVWsXO9YnASrzqfmYu"
                 },
-                "href": "https://api.spotify.com/v1/artists/7dGJo4pcD2V6oG8kP0tJRR",
-                "id": "7dGJo4pcD2V6oG8kP0tJRR",
-                "name": "Eminem",
+                "href": "https://api.spotify.com/v1/artists/0fA0VVWsXO9YnASrzqfmYu",
+                "id": "0fA0VVWsXO9YnASrzqfmYu",
+                "name": "Kid Cudi",
                 "type": "artist",
-                "uri": "spotify:artist:7dGJo4pcD2V6oG8kP0tJRR"
+                "uri": "spotify:artist:0fA0VVWsXO9YnASrzqfmYu"
             }
         ],
         "available_markets": [
@@ -28,18 +28,15 @@
             "BB",
             "BD",
             "BE",
-            "BF",
             "BG",
             "BH",
             "BI",
             "BJ",
-            "BN",
             "BO",
             "BR",
             "BS",
             "BT",
             "BW",
-            "BY",
             "BZ",
             "CA",
             "CD",
@@ -139,7 +136,6 @@
             "NI",
             "NL",
             "NO",
-            "NP",
             "NR",
             "NZ",
             "OM",
@@ -187,7 +183,6 @@
             "UG",
             "US",
             "UY",
-            "UZ",
             "VC",
             "VE",
             "VN",
@@ -199,44 +194,54 @@
             "ZW"
         ],
         "external_urls": {
-            "spotify": "https://open.spotify.com/album/6DN7GcZF1HywzrkGN6Eeqk"
+            "spotify": "https://open.spotify.com/album/5bCk3kWAy2JbbTfHqzZCII"
         },
-        "href": "https://api.spotify.com/v1/albums/6DN7GcZF1HywzrkGN6Eeqk",
-        "id": "6DN7GcZF1HywzrkGN6Eeqk",
+        "href": "https://api.spotify.com/v1/albums/5bCk3kWAy2JbbTfHqzZCII",
+        "id": "5bCk3kWAy2JbbTfHqzZCII",
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/ab67616d0000b273cb66bcc14c6f857c127d5969",
+                "url": "https://i.scdn.co/image/ab67616d0000b2735c8d9ad991d2a23eb039d8dd",
                 "width": 640
             },
             {
                 "height": 300,
-                "url": "https://i.scdn.co/image/ab67616d00001e02cb66bcc14c6f857c127d5969",
+                "url": "https://i.scdn.co/image/ab67616d00001e025c8d9ad991d2a23eb039d8dd",
                 "width": 300
             },
             {
                 "height": 64,
-                "url": "https://i.scdn.co/image/ab67616d00004851cb66bcc14c6f857c127d5969",
+                "url": "https://i.scdn.co/image/ab67616d000048515c8d9ad991d2a23eb039d8dd",
                 "width": 64
             }
         ],
-        "name": "The Marshall Mathers LP2 (Deluxe)",
-        "release_date": "2013-11-05",
+        "name": "Passion, Pain & Demon Slayin'",
+        "release_date": "2016-12-16",
         "release_date_precision": "day",
-        "total_tracks": 21,
+        "total_tracks": 19,
         "type": "album",
-        "uri": "spotify:album:6DN7GcZF1HywzrkGN6Eeqk"
+        "uri": "spotify:album:5bCk3kWAy2JbbTfHqzZCII"
     },
     "artists": [
         {
             "external_urls": {
-                "spotify": "https://open.spotify.com/artist/7dGJo4pcD2V6oG8kP0tJRR"
+                "spotify": "https://open.spotify.com/artist/0fA0VVWsXO9YnASrzqfmYu"
             },
-            "href": "https://api.spotify.com/v1/artists/7dGJo4pcD2V6oG8kP0tJRR",
-            "id": "7dGJo4pcD2V6oG8kP0tJRR",
-            "name": "Eminem",
+            "href": "https://api.spotify.com/v1/artists/0fA0VVWsXO9YnASrzqfmYu",
+            "id": "0fA0VVWsXO9YnASrzqfmYu",
+            "name": "Kid Cudi",
             "type": "artist",
-            "uri": "spotify:artist:7dGJo4pcD2V6oG8kP0tJRR"
+            "uri": "spotify:artist:0fA0VVWsXO9YnASrzqfmYu"
+        },
+        {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3rWZHrfrsPBxVy692yAIxF"
+            },
+            "href": "https://api.spotify.com/v1/artists/3rWZHrfrsPBxVy692yAIxF",
+            "id": "3rWZHrfrsPBxVy692yAIxF",
+            "name": "WILLOW",
+            "type": "artist",
+            "uri": "spotify:artist:3rWZHrfrsPBxVy692yAIxF"
         }
     ],
     "available_markets": [
@@ -254,18 +259,15 @@
         "BB",
         "BD",
         "BE",
-        "BF",
         "BG",
         "BH",
         "BI",
         "BJ",
-        "BN",
         "BO",
         "BR",
         "BS",
         "BT",
         "BW",
-        "BY",
         "BZ",
         "CA",
         "CD",
@@ -365,7 +367,6 @@
         "NI",
         "NL",
         "NO",
-        "NP",
         "NR",
         "NZ",
         "OM",
@@ -413,7 +414,6 @@
         "UG",
         "US",
         "UY",
-        "UZ",
         "VC",
         "VE",
         "VN",
@@ -425,21 +425,21 @@
         "ZW"
     ],
     "disc_number": 1,
-    "duration_ms": 363521,
+    "duration_ms": 277813,
     "explicit": true,
     "external_ids": {
-        "isrc": "USUM71314079"
+        "isrc": "USUM71614693"
     },
     "external_urls": {
-        "spotify": "https://open.spotify.com/track/6or1bKJiZ06IlK0vFvY75k"
+        "spotify": "https://open.spotify.com/track/40jxatV29fk82SAziDsPqN"
     },
-    "href": "https://api.spotify.com/v1/tracks/6or1bKJiZ06IlK0vFvY75k",
-    "id": "6or1bKJiZ06IlK0vFvY75k",
+    "href": "https://api.spotify.com/v1/tracks/40jxatV29fk82SAziDsPqN",
+    "id": "40jxatV29fk82SAziDsPqN",
     "is_local": false,
-    "name": "Rap God",
-    "popularity": 77,
-    "preview_url": "https://p.scdn.co/mp3-preview/df8ab2e63c4c8004f1451c36e698e2358e6f57be?cid=fd28826b8475404284b87ab7f77f1045",
-    "track_number": 9,
+    "name": "Rose Golden",
+    "popularity": 62,
+    "preview_url": "https://p.scdn.co/mp3-preview/b6ad456b026d54baaa8d3427a76155c3d270e39a?cid=fd28826b8475404284b87ab7f77f1045",
+    "track_number": 7,
     "type": "track",
-    "uri": "spotify:track:6or1bKJiZ06IlK0vFvY75k"
+    "uri": "spotify:track:40jxatV29fk82SAziDsPqN"
 }
