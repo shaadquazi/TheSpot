@@ -1,4 +1,4 @@
-from app import app, redirect, request
+from app import app, redirect, request, client_id, client_secret
 import uuid
 import requests
 import base64

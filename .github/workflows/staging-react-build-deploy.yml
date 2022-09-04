@@ -1,4 +1,4 @@
-name: staging-build-and-deploy
+name: staging-react-build-and-deploy
 
 on:
   pull_request_target:
