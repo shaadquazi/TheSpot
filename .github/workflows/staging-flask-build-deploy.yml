@@ -2,7 +2,7 @@ name: staging-flask-build-and-deploy
 
 env:
   AWS_ELASTIC_BEANSTALK_APPLICATION_NAME: "the-spot"
-  AWS_ELASTIC_BEANSTALK_ENVIRONMENT_NAME: "thespot-staging"
+  AWS_ELASTIC_BEANSTALK_ENVIRONMENT_NAME: "the-spot-staging"
   DEPLOY_PACKAGE_NAME: "the-spot-server-${{ github.sha }}.zip"
 
 on:
