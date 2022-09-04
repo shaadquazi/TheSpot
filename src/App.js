@@ -8,11 +8,9 @@ import PageHeader from './componenets/PageHeader';
 import QueueCardList from './componenets/QueueCardList';
 import InfoMenuList from './componenets/InfoMenuList';
 import SuccessSnackbar from './componenets/SuccessSnackbar';
-
+import {getUser, getTracksFromLibrary} from './spotify/index';
 import {
   connectToSpotify,
-  getUser,
-  getTracksFromLibrary,
   joinListeningRoom,
   leaveListeningRoom,
   getUsersInListeningRoom,
@@ -20,7 +18,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   removeTrackFromQueue,
   getQueue,
-} from './componenets/client';
+} from './middleware/index';
 
 function App() {
   const [users, setUsers] = React.useState({});
@@ -46,11 +44,11 @@ function App() {
         if (!currentUser.id) {
           getUser(userAccessToken).then((response) => {
             setCurrentUser(response);
-          });
-          joinListeningRoom(currentUser).then((response) => {
-            setUsers((users) =>
-              Object.assign({}, users, {[response.id]: response}),
-            );
+            joinListeningRoom(currentUser).then((response) => {
+              setUsers((users) =>
+                Object.assign({}, users, {[response.id]: response}),
+              );
+            });
           });
         }
       } else {
