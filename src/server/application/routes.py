@@ -1,4 +1,4 @@
-from app import app, redirect, request, client_id, client_secret
+from application import application, redirect, request, client_id, client_secret
 import uuid
 import requests
 import base64
@@ -9,11 +9,11 @@ def stringToBase64(baseString):
     base64_message = base64_bytes.decode('ascii')
     return base64_message
 
-@app.route('/')
+@application.route('/')
 def index():
     return "Welcome, this is THE SPOT's Middleware!"
 
-@app.route('/authorize')
+@application.route('/authorize')
 def authorize():    
     state = uuid.uuid4()
     scope = "user-read-email user-top-read user-library-read"
@@ -31,7 +31,7 @@ def authorize():
     response = requests.get(endpoint, params=payload)
     return redirect(response.url, code=302)
 
-@app.route('/callback')
+@application.route('/callback')
 def callback():
     code = request.args.get('code')
     error = request.args.get('error')
@@ -60,7 +60,7 @@ def callback():
 
 
 usersOnline = {}
-@app.route('/users', methods=['GET', 'POST', 'DELETE'])
+@application.route('/users', methods=['GET', 'POST', 'DELETE'])
 def users():
     if request.method == 'POST':
         data = request.get_json()
@@ -85,7 +85,7 @@ def users():
             return {'users': {}}, 200
 
 globalQueue = {}
-@app.route('/queue', methods=['GET', 'POST', 'DELETE'])
+@application.route('/queue', methods=['GET', 'POST', 'DELETE'])
 def queue():
     if request.method == 'POST':
         data = request.get_json()
