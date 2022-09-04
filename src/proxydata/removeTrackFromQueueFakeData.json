@@ -1,16 +1,16 @@
 {
     "album": {
-        "album_type": "single",
+        "album_type": "album",
         "artists": [
             {
                 "external_urls": {
-                    "spotify": "https://open.spotify.com/artist/5SXuuuRpukkTvsLuUknva1"
+                    "spotify": "https://open.spotify.com/artist/0fA0VVWsXO9YnASrzqfmYu"
                 },
-                "href": "https://api.spotify.com/v1/artists/5SXuuuRpukkTvsLuUknva1",
-                "id": "5SXuuuRpukkTvsLuUknva1",
-                "name": "Artist1",
+                "href": "https://api.spotify.com/v1/artists/0fA0VVWsXO9YnASrzqfmYu",
+                "id": "0fA0VVWsXO9YnASrzqfmYu",
+                "name": "Kid Cudi",
                 "type": "artist",
-                "uri": "spotify:artist:5SXuuuRpukkTvsLuUknva1"
+                "uri": "spotify:artist:0fA0VVWsXO9YnASrzqfmYu"
             }
         ],
         "available_markets": [
@@ -28,18 +28,15 @@
             "BB",
             "BD",
             "BE",
-            "BF",
             "BG",
             "BH",
             "BI",
             "BJ",
-            "BN",
             "BO",
             "BR",
             "BS",
             "BT",
             "BW",
-            "BY",
             "BZ",
             "CA",
             "CD",
@@ -139,7 +136,6 @@
             "NI",
             "NL",
             "NO",
-            "NP",
             "NR",
             "NZ",
             "OM",
@@ -187,7 +183,6 @@
             "UG",
             "US",
             "UY",
-            "UZ",
             "VC",
             "VE",
             "VN",
@@ -199,44 +194,54 @@
             "ZW"
         ],
         "external_urls": {
-            "spotify": "https://open.spotify.com/album/3HqmX8hGcbbQZODgayNEYx"
+            "spotify": "https://open.spotify.com/album/5bCk3kWAy2JbbTfHqzZCII"
         },
-        "href": "https://api.spotify.com/v1/albums/3HqmX8hGcbbQZODgayNEYx",
-        "id": "3HqmX8hGcbbQZODgayNEYx",
+        "href": "https://api.spotify.com/v1/albums/5bCk3kWAy2JbbTfHqzZCII",
+        "id": "5bCk3kWAy2JbbTfHqzZCII",
         "images": [
             {
                 "height": 640,
-                "url": "https://i.scdn.co/image/some_image",
+                "url": "https://i.scdn.co/image/ab67616d0000b2735c8d9ad991d2a23eb039d8dd",
                 "width": 640
             },
             {
                 "height": 300,
-                "url": "https://i.scdn.co/image/some_image",
+                "url": "https://i.scdn.co/image/ab67616d00001e025c8d9ad991d2a23eb039d8dd",
                 "width": 300
             },
             {
                 "height": 64,
-                "url": "https://i.scdn.co/image/some_image",
+                "url": "https://i.scdn.co/image/ab67616d000048515c8d9ad991d2a23eb039d8dd",
                 "width": 64
             }
         ],
-        "name": "Album Name One",
-        "release_date": "2021-08-27",
+        "name": "Passion, Pain & Demon Slayin'",
+        "release_date": "2016-12-16",
         "release_date_precision": "day",
-        "total_tracks": 1,
+        "total_tracks": 19,
         "type": "album",
-        "uri": "spotify:album:3HqmX8hGcbbQZODgayNEYx"
+        "uri": "spotify:album:5bCk3kWAy2JbbTfHqzZCII"
     },
     "artists": [
         {
             "external_urls": {
-                "spotify": "https://open.spotify.com/artist/5SXuuuRpukkTvsLuUknva1"
+                "spotify": "https://open.spotify.com/artist/0fA0VVWsXO9YnASrzqfmYu"
             },
-            "href": "https://api.spotify.com/v1/artists/5SXuuuRpukkTvsLuUknva1",
-            "id": "5SXuuuRpukkTvsLuUknva1",
-            "name": "Artist1",
+            "href": "https://api.spotify.com/v1/artists/0fA0VVWsXO9YnASrzqfmYu",
+            "id": "0fA0VVWsXO9YnASrzqfmYu",
+            "name": "Kid Cudi",
             "type": "artist",
-            "uri": "spotify:artist:5SXuuuRpukkTvsLuUknva1"
+            "uri": "spotify:artist:0fA0VVWsXO9YnASrzqfmYu"
+        },
+        {
+            "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3rWZHrfrsPBxVy692yAIxF"
+            },
+            "href": "https://api.spotify.com/v1/artists/3rWZHrfrsPBxVy692yAIxF",
+            "id": "3rWZHrfrsPBxVy692yAIxF",
+            "name": "WILLOW",
+            "type": "artist",
+            "uri": "spotify:artist:3rWZHrfrsPBxVy692yAIxF"
         }
     ],
     "available_markets": [
@@ -254,18 +259,15 @@
         "BB",
         "BD",
         "BE",
-        "BF",
         "BG",
         "BH",
         "BI",
         "BJ",
-        "BN",
         "BO",
         "BR",
         "BS",
         "BT",
         "BW",
-        "BY",
         "BZ",
         "CA",
         "CD",
@@ -365,7 +367,6 @@
         "NI",
         "NL",
         "NO",
-        "NP",
         "NR",
         "NZ",
         "OM",
@@ -413,7 +414,6 @@
         "UG",
         "US",
         "UY",
-        "UZ",
         "VC",
         "VE",
         "VN",
@@ -425,21 +425,21 @@
         "ZW"
     ],
     "disc_number": 1,
-    "duration_ms": 252069,
+    "duration_ms": 277813,
     "explicit": true,
     "external_ids": {
-        "isrc": "USSM12105949"
+        "isrc": "USUM71614693"
     },
     "external_urls": {
-        "spotify": "https://open.spotify.com/track/7Bpx2vsWfQFBACRz4h3IqH"
+        "spotify": "https://open.spotify.com/track/40jxatV29fk82SAziDsPqN"
     },
-    "href": "https://api.spotify.com/v1/tracks/7Bpx2vsWfQFBACRz4h3IqH",
-    "id": "7Bpx2vsWfQFBACRz4h3IqH",
+    "href": "https://api.spotify.com/v1/tracks/40jxatV29fk82SAziDsPqN",
+    "id": "40jxatV29fk82SAziDsPqN",
     "is_local": false,
-    "name": "Song Name One",
-    "popularity": 78,
-    "preview_url": "https://p.scdn.co/mp3-preview/b850748651cf920a41a9eab900f08144e41310d6?cid=fd28826b8475404284b87ab7f77f1045",
-    "track_number": 1,
+    "name": "Rose Golden",
+    "popularity": 62,
+    "preview_url": "https://p.scdn.co/mp3-preview/b6ad456b026d54baaa8d3427a76155c3d270e39a?cid=fd28826b8475404284b87ab7f77f1045",
+    "track_number": 7,
     "type": "track",
-    "uri": "spotify:track:7Bpx2vsWfQFBACRz4h3IqH"
+    "uri": "spotify:track:40jxatV29fk82SAziDsPqN"
 }

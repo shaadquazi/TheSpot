@@ -1,0 +1,7 @@
+{
+  "access_token": "BQCVT9MJOQ2_j22YK6HGjqAer_A38FPu1nvlCL8BjBL7es007e2ZuWVPdTfMWSFJEn6EoZ6V4Io54PS9Be_LWsFleMB1hVjZFov0GBpnusBY92HKeXKrRl-teZRnIf177-szwleEa5vwxM51rJFX8CEEKIMFdVmhZI2mR1sNBkFaAxLIkoAQlIUyLfkBGbwa0tWATsvmLLGBED3FExew02yRd_0",
+  "expires_in": 3600,
+  "refresh_token": "AQB9IZfy3FJSEgc86VyAPcjNH7h_xk6VpH4jcyz86wy1FMB-sWhCfdYEbrzP36uEwWK0FXdIvioHgt1MT4OkU2DWYe5VaougjIWeqv2E73oGyxGeDCC0fXk9YSd1ZVyR1PY",
+  "scope": "user-library-read user-read-email user-top-read",
+  "token_type": "Bearer"
+}
