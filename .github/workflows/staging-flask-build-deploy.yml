@@ -36,7 +36,9 @@ jobs:
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
 
       - name: Copy package to S3
-        run : aws s3 cp ${{ env.DEPLOY_PACKAGE_NAME }} s3://${{ secrets.AWS_S3_BUCKET_NAME }}/
+        run : |
+          ls
+          aws s3 cp ./src/server/${{ env.DEPLOY_PACKAGE_NAME }} s3://${{ secrets.AWS_S3_BUCKET_NAME }}/
 
   Deploy:
     runs-on: ubuntu-latest
