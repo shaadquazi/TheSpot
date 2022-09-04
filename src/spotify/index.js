@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export async function getUser(token) {
+  console.log('getUser<v1/me <GET>>');
   const response = await axios.get(`https://api.spotify.com/v1/me`, {
     headers: {
       'Authorization': 'Bearer ' + token,
@@ -11,6 +12,7 @@ export async function getUser(token) {
 }
 
 export async function getTracksFromLibrary(token) {
+  console.log('getTracksFromLibrary<v1/me/tracks <GET>>');
   const tracks = [];
   const limit = 50;
   const maxLimit = 450;

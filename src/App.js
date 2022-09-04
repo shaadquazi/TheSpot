@@ -95,7 +95,6 @@ function App() {
   };
 
   const addToQueue = (song) => {
-    console.log('song: ', song);
     addTrackToQueue(song).then((response) => {
       setSongs((songs) => Object.assign({},
           songs, {[response.id]: response}));
@@ -106,12 +105,13 @@ function App() {
   };
 
   React.useEffect(() => {
-    console.log('Inside useEffect');
+    console.log('useEffect<userOptionSelected>');
+    setUserOptionSelected(handleUserCardOptions());
+
     getQueue().then((response) => {
-      console.log('useEffect getQueue: ', response);
       setSongs((songs) => Object.assign({}, songs, response));
     });
-    setUserOptionSelected(handleUserCardOptions());
+
     if (!currentUser.id) {
       getUsersInListeningRoom().then((response) => {
         setUsers((users) =>
@@ -122,6 +122,7 @@ function App() {
   }, [userOptionSelected]);
 
   React.useEffect(() => {
+    console.log('useEffect<loading>');
     if (loading) {
       if (Object.keys(defaultSearchOptions).length === 0) {
         getTracksFromLibrary(userAccessToken).then((response) => {
@@ -142,6 +143,7 @@ function App() {
   }, [loading]);
 
   React.useEffect(() => {
+    console.log('useEffect<selectedOption>');
     if (selectedOption && selectedOption.id) {
       addToQueue(selectedOption);
     }
