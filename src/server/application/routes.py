@@ -29,8 +29,7 @@ def authorize():
     }    
     
     response = requests.get(endpoint, params=payload)
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Methods', '*')
+    
     return redirect(response.url, code=302)
 
 @application.route('/callback')
