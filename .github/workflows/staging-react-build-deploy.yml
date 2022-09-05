@@ -1,5 +1,8 @@
 name: staging-react-build-and-deploy
 
+env:
+  REACT_APP_STAGING_ENDPOINT: ${{ secrets.REACT_APP_STAGING_ENDPOINT }}
+
 on:
   pull_request_target:
     types:
