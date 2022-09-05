@@ -23,11 +23,7 @@ const client = () => {
 };
 
 export async function connectToSpotify() {
-  const {data} = await client().get(`/authorize`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
+  const {data} = await client().get(`/authorize`);
   console.log('connectToSpotify</authorize <GET>>', data);
   return data; // connectToSpotifyFakeData;
 }
