@@ -1,6 +1,6 @@
 // import axios from 'axios';
-import connectToSpotifyFakeData
-  from '../proxydata/connectToSpotifyFakeData.json';
+// import connectToSpotifyFakeData
+//   from '../proxydata/connectToSpotifyFakeData.json';
 import joinListeningRoomFakeData
   from '../proxydata/joinListeningRoomFakeData.json';
 import leaveListeningRoomFakeData
