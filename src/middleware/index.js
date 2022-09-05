@@ -17,13 +17,17 @@ import axios from 'axios';
 
 const client = () => {
   const instance = axios.create({
-    baseURL: process.env.REACT_APP_STAGING_ENDPOINT,
+    baseURL: process.env.REACT_APP_ENDPOINT,
   });
   return instance;
 };
 
 export async function connectToSpotify() {
-  const {data} = await client().get(`/authorize`);
+  const {data} = await client().get(`/authorize`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
   console.log('connectToSpotify</authorize <GET>>', data);
   return data; // connectToSpotifyFakeData;
 }
