@@ -1,7 +1,6 @@
 name: staging-react-build-and-deploy
 
 env:
-  REACT_APP_STAGING_ENDPOINT: ${{ secrets.REACT_APP_STAGING_ENDPOINT }}
   REACT_APP_ENDPOINT: ${{ secrets.REACT_APP_ENDPOINT }}
 
 on:
