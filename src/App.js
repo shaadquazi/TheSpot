@@ -39,8 +39,8 @@ function App() {
   const [defaultSearchOptions, setDefaultSearchOptions] = React.useState({});
 
   React.useEffect(() => {
-    if (!(userAccessToken && userRefreshToken)) {
-      const queryString = window.location.search;
+    const queryString = window.location.search;
+    if (queryString) {
       const urlParams = new URLSearchParams(queryString);
       setUserAccessToken(urlParams.get('access_token'));
       setUserRefreshToken(urlParams.get('refresh_token'));
@@ -52,17 +52,16 @@ function App() {
 
   const handleUserCardOptions = () => {
     if (userOptionSelected === 0) {
+      console.log('\n\n connected', connected);
       if (connected) {
-        if (userAccessToken) {
-          getUser(userAccessToken).then((response) => {
-            setCurrentUser(response);
-            joinListeningRoom(currentUser).then((response) => {
-              setUsers((users) =>
-                Object.assign({}, users, {[response.id]: response}),
-              );
-            });
+        getUser(userAccessToken).then((response) => {
+          setCurrentUser(response);
+          joinListeningRoom(currentUser).then((response) => {
+            setUsers((users) =>
+              Object.assign({}, users, {[response.id]: response}),
+            );
           });
-        }
+        });
       } else {
         setSnackBarMessage('Please connect to Spotify');
         setSnackBar(true);

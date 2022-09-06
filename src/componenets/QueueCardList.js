@@ -71,7 +71,7 @@ export default function QueueCardList(props) {
           )
         }
       >
-        {songs ? (
+        {Object.keys(songs).length ? (
           Object.keys(songs).map((key, index) => {
             const song = songs[key];
             return (
