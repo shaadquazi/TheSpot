@@ -54,8 +54,9 @@ def callback():
             "Content-Type": "application/x-www-form-urlencoded"
         }
         response = requests.post(endpoint, params=payload, headers=headers)
-        print("Response:  ", response)
-        return response.json(), 200        
+        user = response.json()
+        react_callback = f'https://the-spot.s3.amazonaws.com/index.html?access_token={user["access_token"]}&refresh_token={user["refresh_token"]}'
+        return redirect(react_callback, code=302)
     else:
         return {'error': error}, 403
 
