@@ -52,14 +52,13 @@ function App() {
 
   const handleUserCardOptions = () => {
     if (userOptionSelected === 0) {
-      console.log('\n\n connected', connected);
       if (connected) {
         getUser(userAccessToken).then((response) => {
-          setCurrentUser(response);
-          joinListeningRoom(currentUser).then((response) => {
+          joinListeningRoom(response).then((response) => {
             setUsers((users) =>
               Object.assign({}, users, {[response.id]: response}),
             );
+            setCurrentUser(response);
           });
         });
       } else {
