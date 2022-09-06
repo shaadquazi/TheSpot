@@ -15,6 +15,7 @@ import CardList from './CardList';
 import ListItem from './ListItem';
 
 export default function QueueCardList(props) {
+  const [songsExists, setSongsExists] = React.useState(false);
   const {
     handleAddToQueue,
     setSelectedOption,
@@ -23,6 +24,10 @@ export default function QueueCardList(props) {
     options,
     loading,
   } = props;
+
+  React.useEffect(() => {
+    setSongsExists(Object.keys(songs).length > 0);
+  }, [songs]);
 
   const QueueList = styled(CardList)({
     height: '75vh',
@@ -71,7 +76,7 @@ export default function QueueCardList(props) {
           )
         }
       >
-        {Object.keys(songs).length > 0 ? (
+        {songsExists ? (
           Object.keys(songs).map((key, index) => {
             const song = songs[key];
             return (
