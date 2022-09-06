@@ -47,7 +47,7 @@ export async function leaveListeningRoom(user) {
 export async function getUsersInListeningRoom() {
   const {data} = await client().get(`/users`);
   console.log('getUsersInListeningRoom</users <GET>>', data);
-  return data;// getUsersInListeningRoomFakeData.users;
+  return data.users;// getUsersInListeningRoomFakeData.users;
 }
 
 export async function addTrackToQueue(track) {
@@ -69,7 +69,7 @@ export async function removeTrackFromQueue(track) {
 export async function getQueue() {
   const {data} = await client().get(`/queue`);
   console.log('getQueue</queue <GET>>', data);
-  return data;// getQueueFakeData.queue;
+  return data.queue;// getQueueFakeData.queue;
 }
 
 export default {connectToSpotify,

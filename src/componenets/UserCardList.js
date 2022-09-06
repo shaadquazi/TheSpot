@@ -35,7 +35,7 @@ export default function UserCardList(props) {
       headerText='Users Joined'
       BottomNavigation={userBottomNavigation}
     >
-      {users ? (Object.keys(users).map((key, index) => {
+      {Object.keys(users).length ? (Object.keys(users).map((key, index) => {
         const user = users[key];
         return <ListItem
           key={user.id}
