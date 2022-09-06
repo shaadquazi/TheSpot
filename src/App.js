@@ -10,7 +10,7 @@ import InfoMenuList from './componenets/InfoMenuList';
 import SuccessSnackbar from './componenets/SuccessSnackbar';
 import {getUser, getTracksFromLibrary} from './spotify/index';
 import {
-  connectToSpotify,
+  // connectToSpotify,
   joinListeningRoom,
   leaveListeningRoom,
   getUsersInListeningRoom,
