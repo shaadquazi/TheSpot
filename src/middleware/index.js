@@ -29,7 +29,7 @@ export async function connectToSpotify() {
 }
 
 export async function joinListeningRoom(user) {
-  const {data} = await axios.post(`/users`, user, {
+  const {data} = await client().post(`/users`, user, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -39,19 +39,19 @@ export async function joinListeningRoom(user) {
 }
 
 export async function leaveListeningRoom(user) {
-  const {data} = await axios.delete(`/users?id=${user.id}`);
+  const {data} = await client().delete(`/users?id=${user.id}`);
   console.log('leaveListeningRoom</users <DELETE>>', data);
   return data;// leaveListeningRoomFakeData;
 }
 
 export async function getUsersInListeningRoom() {
-  const {data} = await axios.get(`/users`);
+  const {data} = await client().get(`/users`);
   console.log('getUsersInListeningRoom</users <GET>>', data);
   return data;// getUsersInListeningRoomFakeData.users;
 }
 
 export async function addTrackToQueue(track) {
-  const {data} = await axios.post(`/queue`, track, {
+  const {data} = await client().post(`/queue`, track, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -61,13 +61,13 @@ export async function addTrackToQueue(track) {
 }
 
 export async function removeTrackFromQueue(track) {
-  const {data} = await axios.delete(`/queue?id=${track.id}`);
+  const {data} = await client().delete(`/queue?id=${track.id}`);
   console.log('removeTrackFromQueue</queue <DELETE>>'), data;
   return data;// removeTrackFromQueueFakeData;
 }
 
 export async function getQueue() {
-  const {data} = await axios.get(`/queue`);
+  const {data} = await client().get(`/queue`);
   console.log('getQueue</queue <GET>>', data);
   return data;// getQueueFakeData.queue;
 }
