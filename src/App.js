@@ -53,7 +53,7 @@ function App() {
   const handleUserCardOptions = () => {
     if (userOptionSelected === 0) {
       if (connected) {
-        if (!currentUser.id) {
+        if (userAccessToken) {
           getUser(userAccessToken).then((response) => {
             setCurrentUser(response);
             joinListeningRoom(currentUser).then((response) => {

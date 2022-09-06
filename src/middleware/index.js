@@ -45,8 +45,8 @@ export async function leaveListeningRoom(user) {
 }
 
 export async function getUsersInListeningRoom() {
-  console.log('getUsersInListeningRoom</users <GET>>');
-  // const response = await axios.get(`/users`);
+  const {data} = await axios.get(`/users`);
+  console.log('getUsersInListeningRoom</users <GET>>', data);
   return data;// getUsersInListeningRoomFakeData.users;
 }
 
