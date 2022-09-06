@@ -13,11 +13,6 @@ import ListItem from './ListItem';
 
 export default function UserCardList(props) {
   const {handleAddUsers, users, connected} = props;
-  const [usersExists, setUsersExists] = React.useState(false);
-
-  React.useEffect(() => {
-    setUsersExists(Object.keys(users).length > 0);
-  }, [users]);
 
   const UserList = styled(CardList)({
     maxHeight: '49.5vh',
@@ -40,7 +35,7 @@ export default function UserCardList(props) {
       headerText='Users Joined'
       BottomNavigation={userBottomNavigation}
     >
-      {usersExists ? (Object.keys(users).map((key, index) => {
+      {users ? (Object.keys(users).map((key, index) => {
         const user = users[key];
         return <ListItem
           key={user.id}
