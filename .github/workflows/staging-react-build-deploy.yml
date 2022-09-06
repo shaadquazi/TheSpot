@@ -1,8 +1,5 @@
 name: staging-react-build-and-deploy
 
-env:
-  REACT_APP_ENDPOINT: ${{ secrets.REACT_APP_ENDPOINT }}
-
 on:
   pull_request_target:
     types:
@@ -23,6 +20,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+          
+      - name: Create env file
+        run: |
+          touch .env
+          echo REACT_APP_ENDPOINT=${{ secrets.REACT_APP_ENDPOINT }} >> .env
 
       - name: Installing dependencies
         run: npm install
