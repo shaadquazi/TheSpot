@@ -38,6 +38,18 @@ function App() {
   const [userOptionSelected, setUserOptionSelected] = React.useState(-1);
   const [defaultSearchOptions, setDefaultSearchOptions] = React.useState({});
 
+  React.useEffect(() => {
+    if (!(userAccessToken && userRefreshToken)) {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      setUserAccessToken(urlParams.get('access_token'));
+      setUserRefreshToken(urlParams.get('refresh_token'));
+      setSnackBarMessage('Connected to Spotify');
+      setSnackBar(true);
+      setConnected(true);
+    }
+  }, []);
+
   const handleUserCardOptions = () => {
     if (userOptionSelected === 0) {
       if (connected) {
@@ -56,7 +68,7 @@ function App() {
         setSnackBar(true);
       }
     } else if (userOptionSelected === 1) {
-      if (userAccessToken.length > 0 && userRefreshToken.length > 0) {
+      if (userAccessToken && userRefreshToken) {
         leaveListeningRoom(currentUser).then((response) => {
           setUsers((users) => {
             const remainingUsers = {...users};
@@ -67,15 +79,16 @@ function App() {
           setUserRefreshToken('');
           setCurrentUser({});
           setConnected(false);
+          window.location.search = '';
         });
       } else {
-        connectToSpotify().then((response) => {
-          setUserAccessToken(response.access_token);
-          setUserRefreshToken(response.refresh_token);
-          setSnackBarMessage('Connected to Spotify');
-          setSnackBar(true);
-          setConnected(true);
-        });
+        // connectToSpotify().then((response) => {
+        //   setUserAccessToken(response.access_token);
+        //   setUserRefreshToken(response.refresh_token);
+        //   setSnackBarMessage('Connected to Spotify');
+        //   setSnackBar(true);
+        //   setConnected(true);
+        // });
       }
     }
   };

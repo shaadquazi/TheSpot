@@ -5,8 +5,8 @@ import {Typography} from '@mui/material';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
-import ContactlessIcon from '@mui/icons-material/Contactless';
 import LogoutIcon from '@mui/icons-material/Logout';
+import SpotifyButton from './SpotifyButton';
 
 import CardList from './CardList';
 import ListItem from './ListItem';
@@ -29,10 +29,7 @@ export default function UserCardList(props) {
       {connected ? (
         <BottomNavigationAction label='Log out' icon={<LogoutIcon />} />
       ) : (
-        <BottomNavigationAction
-          label='Connect To Spotify'
-          icon={<ContactlessIcon />}
-        />
+        <SpotifyButton />
       )}
     </BottomNavigation>
   );
