@@ -14,10 +14,11 @@
 // import addTrackToQueueFakeData
 //   from '../proxydata/addTrackToQueueFakeData.json';
 import axios from 'axios';
+import {getBaseAPIURL} from '../utils/index';
 
 const client = () => {
   const instance = axios.create({
-    baseURL: process.env.REACT_APP_ENDPOINT,
+    baseURL: getBaseAPIURL(),
   });
   return instance;
 };
