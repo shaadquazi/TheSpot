@@ -1,4 +1,4 @@
-from application import application, redirect, request, client_id, client_secret
+from application import application, redirect, request, client_id, client_secret, baseReactURL
 import uuid
 import requests
 import base64
@@ -55,7 +55,9 @@ def callback():
         }
         response = requests.post(endpoint, params=payload, headers=headers)
         user = response.json()
-        react_callback = f'https://the-spot.s3.amazonaws.com/index.html?access_token={user["access_token"]}&refresh_token={user["refresh_token"]}'
+
+        react_callback = f'{baseReactURL}?access_token={user["access_token"]}&refresh_token={user["refresh_token"]}'
+        
         return redirect(react_callback, code=302)
     else:
         return {'error': error}, 403

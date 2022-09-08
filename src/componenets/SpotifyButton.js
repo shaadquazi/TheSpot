@@ -5,6 +5,7 @@ import ContactlessIcon from '@mui/icons-material/Contactless';
 import {useThemeProps} from '@mui/system';
 import {ButtonBase} from '@mui/material';
 import {generateUtilityClass, generateUtilityClasses} from '@mui/base';
+import {getBaseAPIURL} from '../utils/index';
 
 export function getBottomNavigationActionUtilityClass(slot) {
   return generateUtilityClass('MuiBottomNavigationAction', slot);
@@ -79,7 +80,7 @@ const SpotifyButton = React.forwardRef(function SpotifyButton(inProps, ref) {
     ...other
   } = props;
 
-  const baseURL = `${process.env.REACT_APP_ENDPOINT}/authorize`;
+  const baseURL = `${getBaseAPIURL()}/authorize`;
 
   const ownerState = props;
 
