@@ -23,10 +23,24 @@ const client = () => {
   return instance;
 };
 
-export async function connectToSpotify() {
-  const {data} = await client().get(`/authorize`);
-  console.log('connectToSpotify</authorize <GET>>', data);
-  return data; // connectToSpotifyFakeData;
+const getRequest = async (endpoint, setErrors) => {
+  const {data} = await client().get(endpoint).catch((error) => {
+    setErrors(
+        {
+          error: error.response.data,
+          message: 'Sorry! We are unable to connect to the network',
+        },
+    );
+  });
+  return data;
+};
+
+export async function connectToSpotify(setErrors) {
+  // const {data} = await client().get(`/authorize`).catch((error) => {
+  //   setError('Sorry! We are unable to connect to the network');
+  // });
+  // console.log('connectToSpotify</authorize <GET>>', data);
+  return getRequest(`/authorize`, setErrors);
 }
 
 export async function joinListeningRoom(user) {
@@ -45,10 +59,11 @@ export async function leaveListeningRoom(user) {
   return data;// leaveListeningRoomFakeData;
 }
 
-export async function getUsersInListeningRoom() {
-  const {data} = await client().get(`/users`);
-  console.log('getUsersInListeningRoom</users <GET>>', data);
-  return data.users;// getUsersInListeningRoomFakeData.users;
+export async function getUsersInListeningRoom(setErrors) {
+  // const {data} = await client().get(`/users`);
+  // console.log('getUsersInListeningRoom</users <GET>>', data);
+  // return data.users;// getUsersInListeningRoomFakeData.users;
+  return getRequest(`/users`, setErrors).users;
 }
 
 export async function addTrackToQueue(track) {
@@ -67,10 +82,11 @@ export async function removeTrackFromQueue(track) {
   return data;// removeTrackFromQueueFakeData;
 }
 
-export async function getQueue() {
-  const {data} = await client().get(`/queue`);
-  console.log('getQueue</queue <GET>>', data);
-  return data.queue;// getQueueFakeData.queue;
+export async function getQueue(setErrors) {
+  // const {data} = await client().get(`/queue`);
+  // console.log('getQueue</queue <GET>>', data);
+  // return data.queue;// getQueueFakeData.queue;
+  return getRequest(`/queue`, setErrors).queue;
 }
 
 export default {connectToSpotify,

@@ -23,6 +23,7 @@ import {
 function App() {
   const [users, setUsers] = React.useState({});
   const [songs, setSongs] = React.useState({});
+  const [errors, setErrors] = React.useState({});
 
   const [currentUser, setCurrentUser] = React.useState({});
   const [showSnackBar, setSnackBar] = React.useState(false);
@@ -119,18 +120,26 @@ function App() {
     console.log('useEffect<userOptionSelected>');
     setUserOptionSelected(handleUserCardOptions());
 
-    getQueue().then((response) => {
+    getQueue(setErrors).then((response) => {
       setSongs((songs) => Object.assign({}, songs, response));
     });
 
     if (!currentUser.id) {
-      getUsersInListeningRoom().then((response) => {
+      getUsersInListeningRoom(setErrors).then((response) => {
         setUsers((users) =>
           Object.assign({}, users, response),
         );
       });
     }
   }, [userOptionSelected]);
+
+  React.useEffect(() => {
+    console.log('useEffect<errors>');
+    if (Object.keys(errors).length) {
+      setSnackBarMessage(errors.message);
+      setSnackBar(true);
+    }
+  }, [errors]);
 
   React.useEffect(() => {
     console.log('useEffect<loading>');
