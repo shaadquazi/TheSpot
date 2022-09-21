@@ -11,7 +11,6 @@ import SuccessSnackbar from './componenets/SuccessSnackbar';
 import {
   getUser,
   getTracksFromLibrary,
-  addTrackToSpotifyQueue,
 } from './spotify/index';
 import {
   // connectToSpotify,
@@ -112,13 +111,11 @@ function App() {
 
   const addToQueue = (song) => {
     addTrackToQueue(song).then((response) => {
-      addTrackToSpotifyQueue(userAccessToken, song).then((res) => {
-        setSongs((songs) => Object.assign({},
-            songs, {[response.id]: response}));
-        setSearchTextBoxVisibility(false);
-        setSnackBarMessage('Added to your Queue');
-        setSnackBar(true);
-      });
+      setSongs((songs) => Object.assign({},
+          songs, {[response.id]: response}));
+      setSearchTextBoxVisibility(false);
+      setSnackBarMessage('Added to your Queue');
+      setSnackBar(true);
     });
   };
 
