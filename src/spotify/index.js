@@ -41,7 +41,22 @@ export async function getTracksFromLibrary(token) {
   return tracks;
 }
 
+export async function addTrackToSpotifyQueue(token, track) {
+  console.log('addTrackToSpotifyQueue<v1/me/player/queue <POST>>');
+  const response = await axios.post(`https://api.spotify.com/v1/me/player/queue`, null, {
+    params: {
+      uri: track.uri,
+    },
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+    },
+  });
+  return response.data;
+}
+
 export default {
   getUser,
   getTracksFromLibrary,
+  addTrackToSpotifyQueue,
 };

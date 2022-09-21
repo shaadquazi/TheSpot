@@ -8,7 +8,11 @@ import PageHeader from './componenets/PageHeader';
 import QueueCardList from './componenets/QueueCardList';
 import InfoMenuList from './componenets/InfoMenuList';
 import SuccessSnackbar from './componenets/SuccessSnackbar';
-import {getUser, getTracksFromLibrary} from './spotify/index';
+import {
+  getUser,
+  getTracksFromLibrary,
+  addTrackToSpotifyQueue,
+} from './spotify/index';
 import {
   // connectToSpotify,
   joinListeningRoom,
@@ -108,11 +112,13 @@ function App() {
 
   const addToQueue = (song) => {
     addTrackToQueue(song).then((response) => {
-      setSongs((songs) => Object.assign({},
-          songs, {[response.id]: response}));
-      setSearchTextBoxVisibility(false);
-      setSnackBarMessage('Added to your Queue');
-      setSnackBar(true);
+      addTrackToSpotifyQueue(userAccessToken, song).then((res) => {
+        setSongs((songs) => Object.assign({},
+            songs, {[response.id]: response}));
+        setSearchTextBoxVisibility(false);
+        setSnackBarMessage('Added to your Queue');
+        setSnackBar(true);
+      });
     });
   };
 

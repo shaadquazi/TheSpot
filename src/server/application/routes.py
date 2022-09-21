@@ -16,7 +16,7 @@ def index():
 @application.route('/authorize')
 def authorize():    
     state = uuid.uuid4()
-    scope = "user-read-email user-top-read user-library-read"
+    scope = "user-read-email user-top-read user-library-read user-modify-playback-state"
     
     endpoint = "https://accounts.spotify.com/authorize"    
     payload = {
