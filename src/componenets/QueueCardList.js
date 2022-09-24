@@ -10,6 +10,9 @@ import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Divider from '@mui/material/Divider';
 import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 import CardList from './CardList';
 import ListItem from './ListItem';
@@ -19,7 +22,9 @@ export default function QueueCardList(props) {
     handleAddToQueue,
     setSelectedOption,
     songs,
+    songsPriority,
     searchTextBoxVisibility,
+    handleVote,
     options,
     loading,
   } = props;
@@ -72,16 +77,38 @@ export default function QueueCardList(props) {
         }
       >
         {Object.keys(songs).length ? (
-          Object.keys(songs).map((key, index) => {
+          songsPriority.map(function(key) {
             const song = songs[key];
             return (
-              <ListItem
-                key={key}
-                alt={song.display_name}
-                src={song.album.images[0].url}
-                title={song.name}
-                caption={song.artists.map((artist) => artist.name).join(', ')}
-              />
+              <Box key={key}>
+                <Grid container direction='row' sx={{
+                  justifyContent: 'space-between',
+                  flexWrap: 'nowrap',
+                }}>
+                  <ListItem
+                    key={key}
+                    alt={song.name}
+                    src={song.album.images[0].url}
+                    title={song.name}
+                    caption={
+                      song.artists.map((artist) => artist.name).join(', ')
+                    }
+                  />
+                  <Box>
+                    <Grid container direction='row' sx={{
+                      justifyContent: 'space-between',
+                      flexWrap: 'nowrap',
+                    }}>
+                      <IconButton>
+                        <AddIcon onClick={() => handleVote(song.id, 1)}/>
+                      </IconButton>
+                      <IconButton>
+                        <RemoveIcon onClick={() => handleVote(song.id, -1)}/>
+                      </IconButton>
+                    </Grid>
+                  </Box>
+                </Grid>
+              </Box>
             );
           })
         ) : (

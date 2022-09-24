@@ -20,12 +20,14 @@ import {
   addTrackToQueue,
   // eslint-disable-next-line no-unused-vars
   removeTrackFromQueue,
+  registerVote,
   getQueue,
 } from './middleware/index';
 
 function App() {
   const [users, setUsers] = React.useState({});
   const [songs, setSongs] = React.useState({});
+  const [songsPriority, setSongPriority] = React.useState([]);
   const [errors, setErrors] = React.useState({});
 
   const [currentUser, setCurrentUser] = React.useState({});
@@ -112,7 +114,8 @@ function App() {
   const addToQueue = (song) => {
     addTrackToQueue(song).then((response) => {
       setSongs((songs) => Object.assign({},
-          songs, {[response.id]: response}));
+          songs, {[response.song.id]: response.song}));
+      setSongPriority(response.queueOrder);
       setSearchTextBoxVisibility(false);
       setSnackBarMessage('Added to your Queue');
       setSnackBar(true);
@@ -123,9 +126,6 @@ function App() {
     console.log('useEffect<userOptionSelected>');
     setUserOptionSelected(handleUserCardOptions());
 
-    getQueue(setErrors).then((response) => {
-      setSongs((songs) => Object.assign({}, songs, response));
-    });
 
     if (!currentUser.id) {
       getUsersInListeningRoom(setErrors).then((response) => {
@@ -167,6 +167,12 @@ function App() {
 
   React.useEffect(() => {
     console.log('useEffect<selectedOption>');
+
+    getQueue(setErrors).then((response) => {
+      setSongs((songs) => Object.assign({}, songs, response.queue));
+      setSongPriority(response.queueOrder);
+    });
+
     if (selectedOption && selectedOption.id) {
       addToQueue(selectedOption);
     }
@@ -198,6 +204,12 @@ function App() {
     console.log('handleSkipNextIcon');
   };
 
+  const handleVote = (id, vote) => {
+    registerVote(id, vote).then((response) => {
+      setSongPriority(response);
+    });
+  };
+
   return (
     <Box>
       <Grid
@@ -215,9 +227,11 @@ function App() {
           <Grid container direction='row' sx={{height: '100%'}}>
             <QueueCardList
               songs={songs}
+              songsPriority={songsPriority}
               handleAddToQueue={handleAddToQueue}
               loading={loading}
               searchTextBoxVisibility={searchTextBoxVisibility}
+              handleVote={handleVote}
               setSelectedOption={setSelectedOption}
               options={defaultSearchOptions}
             />

@@ -89,12 +89,14 @@ def users():
             return {'users': {}}, 200
 
 globalQueue = {}
+globalQueuePriority = []
 @application.route('/queue', methods=['GET', 'POST', 'DELETE'])
 def queue():
     if request.method == 'POST':
         data = request.get_json()
         globalQueue[data['id']] = data
-        return data, 201
+        globalQueuePriority.append(data['id'])
+        return {'song': data, 'queueOrder': globalQueuePriority}, 201
     elif request.method == 'DELETE':
         id = request.args.get('id')
         if id:
@@ -104,6 +106,27 @@ def queue():
         return {'error': 'Please provide track.id'}, 400
     else:
         if globalQueue:
-            return {'queue': globalQueue}, 200
+            return {'queue': globalQueue, 'queueOrder': globalQueuePriority}, 200
         else:
             return {'queue': {}}, 200
+
+@application.route('/vote', methods=['POST'])
+def vote():
+    if request.method == 'POST':
+        data = request.get_json()
+        id = data['id']
+        value = data['value']
+
+        if len(globalQueuePriority) < 1:
+            return {'error': 'Queue is empty'}, 400
+        print(globalQueuePriority)
+        currentPosition = globalQueuePriority.index(id) + 1
+        newPosition = currentPosition + (-1 * value)
+        if currentPosition == newPosition:
+            return {'queueOrder': globalQueuePriority}, 200
+        globalQueuePriority.remove(id)
+        if newPosition < 2:
+            globalQueuePriority.insert(0, id)            
+        else:
+            globalQueuePriority.insert(newPosition - 1, id)
+        return {'queueOrder': globalQueuePriority}, 200

@@ -36,11 +36,11 @@ const getRequest = async (endpoint, setErrors) => {
 };
 
 export async function connectToSpotify(setErrors) {
-  // const {data} = await client().get(`/authorize`).catch((error) => {
-  //   setError('Sorry! We are unable to connect to the network');
-  // });
-  // console.log('connectToSpotify</authorize <GET>>', data);
-  return getRequest(`/authorize`, setErrors);
+  const {data} = await client().get(`/authorize`).catch((error) => {
+    setError('Sorry! We are unable to connect to the network');
+  });
+  console.log('connectToSpotify</authorize <GET>>', data);
+  // return getRequest(`/authorize`, setErrors);
 }
 
 export async function joinListeningRoom(user) {
@@ -60,10 +60,10 @@ export async function leaveListeningRoom(user) {
 }
 
 export async function getUsersInListeningRoom(setErrors) {
-  // const {data} = await client().get(`/users`);
-  // console.log('getUsersInListeningRoom</users <GET>>', data);
-  // return data.users;// getUsersInListeningRoomFakeData.users;
-  return getRequest(`/users`, setErrors).users;
+  const {data} = await client().get(`/users`);
+  console.log('getUsersInListeningRoom</users <GET>>', data);
+  return data.users;// getUsersInListeningRoomFakeData.users;
+  // return getRequest(`/users`, setErrors).users;
 }
 
 export async function addTrackToQueue(track) {
@@ -83,16 +83,32 @@ export async function removeTrackFromQueue(track) {
 }
 
 export async function getQueue(setErrors) {
-  // const {data} = await client().get(`/queue`);
-  // console.log('getQueue</queue <GET>>', data);
-  // return data.queue;// getQueueFakeData.queue;
-  return getRequest(`/queue`, setErrors).queue;
+  const {data} = await client().get(`/queue`);
+  console.log('getQueue</queue <GET>>', data);
+  return data;// getQueueFakeData.queue;
+  // return getRequest(`/queue`, setErrors).queue;
 }
 
-export default {connectToSpotify,
+export async function registerVote(id, value) {
+  const {data} = await client().post(`/vote`, {
+    id,
+    value,
+  }, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  console.log('registerVote</vote <POST>>', data);
+  return data.queueOrder;
+}
+
+export default {
+  connectToSpotify,
   joinListeningRoom,
   leaveListeningRoom,
   getUsersInListeningRoom,
   addTrackToQueue,
   removeTrackFromQueue,
-  getQueue};
+  getQueue,
+  registerVote,
+};
